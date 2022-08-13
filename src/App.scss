@@ -1,0 +1,218 @@
+$mainColor: #000;
+$lightColor: lighten(#000, 57);
+
+.app {
+    background-color: #fff;
+
+    .header {
+        height: 10vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        p {
+            font-size: calc(10px + 2vmin);
+            color: $mainColor;
+        }
+    }
+
+    .content {
+        height: calc(90vh - 20px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        .sort_wrap {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid $lightColor;
+            user-select: none;
+
+            & > span {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                white-space: nowrap;
+                text-align: left;
+
+                &:not(:first-child) {
+                    padding-left: 20px;
+                    cursor: pointer;
+
+                    &:hover {
+                        font-weight: 600;
+                    }
+
+                    &.active {
+                        font-weight: 600;
+                    }
+                }
+
+                .icon {
+                    display: inline-block;
+                    position: relative;
+                    top: 4px;
+                    right: -5px;
+
+                    &.fa-sort-down {
+                        top: -2px;
+                    }
+                }
+            }
+        }
+
+        .tree {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow: hidden;
+            overflow-y: auto;
+            max-height: 80vh;
+            padding: 10px;
+
+            .line {
+                display: block;
+                text-align: left;
+                line-height: 2;
+                white-space: nowrap;
+                width: 100%;
+
+                &.folder {
+                    font-size: 24px;
+                }
+
+                &.file {
+                    position: relative;
+                    font-size: 20px;
+                    padding-left: 30px;
+                    margin-bottom: 10px;
+
+                    display: grid;
+                    width: calc(100% - 10px);
+                    grid-template-columns: 55px calc(50% - 40px) calc(50% - 40px);
+                    grid-template-rows: 25px 25px;
+                    grid-gap: 10px;
+                    grid-template-areas:
+                        "icon name name"
+                        "icon size ts";
+                    align-items: start;
+                    justify-items: stretch;
+                }
+
+                .icon {
+                    display: inline-block;
+
+                    &__folder {
+                        font-size: 24px;
+                    }
+
+                    &__file {
+                        grid-area: icon;
+                        align-self: center;
+                        justify-self: start;
+                        font-size: 54px;
+                    }
+                }
+
+                .type_hint {
+                    display: inline-block;
+                    position: absolute;
+                    top: 2px;
+                    left: 32px;
+                    width: auto;
+                    height: 10px;
+                    color: #fff;
+                    font-size: 10px;
+                }
+
+                .filename {
+                    grid-area: name;
+                    align-self: baseline;
+                    display: inline-block;
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .size {
+                    grid-area: size;
+                    justify-self: start;
+                    font-size: 13px;
+                }
+
+                .ts {
+                    grid-area: ts;
+                    justify-self: end;
+                    font-size: 13px;
+                    padding-right: 10px;
+                }
+            }
+        }
+
+        .msg {
+            font-size: 20px;
+            padding: 20px 20px 20px;
+            margin: 30px 0;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            text-align: center;
+
+            &.loading {
+                color: green;
+                background-color: lighten(lightgreen, 10);
+            }
+
+            &.error {
+                font-size: 24px;
+                color: red;
+                background-color: lighten(lightpink, 10);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            padding: 10px;
+
+            .sort_wrap {
+                flex-wrap: wrap;
+                justify-content: center;
+                line-height: 2;
+
+                & > span {
+                    width: auto;
+                }
+            }
+
+            .tree {
+                .line {
+                    &.folder {
+                        font-size: 18px;
+                        padding: 10px 0;
+                    }
+
+                    &.file {
+                        font-size: 16px;
+                        padding-left: 15px;
+                    }
+
+                    .type_hint {
+                        display: inline-block;
+                        position: absolute;
+                        top: 2px;
+                        left: 17px;
+                    }
+                }
+            }
+
+            .msg {
+                font-size: 18px;
+                padding: 10px 10px 10px;
+                margin: 20px 0;
+            }
+        }
+    }
+}

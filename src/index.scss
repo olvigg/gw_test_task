@@ -1,0 +1,88 @@
+
+@font-face {
+    font-family: 'Roboto';
+    src: url("./assets/fonts/roboto/Roboto-Regular-webfont.woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.roboto {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'RobotoLight';
+    src: url("./assets/fonts/roboto/Roboto-Light-webfont.woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.roboto-light {
+    font-family: RobotoLight, sans-serif;
+    font-weight: 400;
+}
+
+// Clearfix
+//
+// For modern browsers
+// 1. The space content is one way to avoid an Opera bug when the
+//		contenteditable attribute is included anywhere else in the document.
+//		Otherwise it causes space to appear at the top and bottom of elements
+//		that are clearfixed.
+// 2. The use of `table` rather than `block` is only necessary if using
+//		`:before` to contain the top-margins of child elements.
+//
+// Source: http://nicolasgallagher.com/micro-clearfix-hack/
+
+.clearfix {
+    &:after,
+    &:before {
+        content: " "; // 1
+        display: table; // 2
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+body,
+div,
+html,
+html a,
+html h1,
+html h2,
+html h3,
+html h4,
+html h5,
+html h6,
+html li,
+html p,
+input,
+span,
+textarea {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.004);
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    padding: 0;
+    margin: 0;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    outline: none;
+}
+
+/********** Add Your Global CSS Here **********/
