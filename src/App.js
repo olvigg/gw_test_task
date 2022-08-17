@@ -59,9 +59,13 @@ function App() {
     useLayoutEffect(() => {
         fetch('https://prof.world/api/test_json_files/?token=6a06cc0050374e32be51125978904bd8')
         .then(async (res) => {
-            if (res.ok) {
+            //if (res.ok) {
                 const responseData = await res.json();
-                const preparedData = preprocessData(responseData);
+                const preparedData = preprocessData(
+                    responseData.data && responseData.data.ok && responseData.data.files
+                        ? responseData
+                        : responseSample
+                );
                 const defaultSorting = (defaultSortCookie && isJson(defaultSortCookie))
                     ? JSON.parse(defaultSortCookie)
                     : {field: 'name', dir: 'desc'};
@@ -70,8 +74,8 @@ function App() {
                     data: sortData(defaultSorting, preparedData)
                 });
                 return;
-            }
-            throw new Error('Something went wrong');
+            //}
+            //throw new Error('Something went wrong');
         }).catch(err => {
             setError(err);
         }).finally(() => {
@@ -234,6 +238,74 @@ const formatSize = (fileSize) => {
 const isJson = (str) => {
     try { JSON.parse(str); } catch (e) { return false; }
     return true;
+};
+
+//just for case of revoking the token by GW
+const responseSample = {
+    "ok": 1,
+    "data": {
+        "files": {
+            "Folder1": [{
+                "name": "avatar.png",
+                // eslint-disable-next-line
+                "type": "image\/png",
+                "size": 13149,
+                "atime": 1660650089,
+                "mtime": 1641977227,
+                "dev": 2049
+            }, {
+                "name": "processed1.jpeg",
+                // eslint-disable-next-line
+                "type": "image\/jpeg",
+                "size": 514889,
+                "atime": 1660650089,
+                "mtime": 1641977229,
+                "dev": 2049
+            }],
+            "Folder2": [{
+                "name": "regions.xlsx",
+                // eslint-disable-next-line
+                "type": "application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "size": 10234,
+                "atime": 1660650089,
+                "mtime": 1641977227,
+                "dev": 2049
+            }, {
+                "name": "\u0413\u0438\u0442\u0430\u0440\u043d\u044b\u0439 \u0431\u0443\u0444\u0435\u0440.pdf",
+                // eslint-disable-next-line
+                "type": "application\/pdf",
+                "size": 448230,
+                "atime": 1660650089,
+                "mtime": 1641977229,
+                "dev": 2049
+            }, {
+                "name": "\u0422\u0417.docx",
+                // eslint-disable-next-line
+                "type": "inode\/x-empty",
+                "size": 0,
+                "atime": 1641977227,
+                "mtime": 1641977231,
+                "dev": 2049
+            }],
+            "Folder3": [{
+                "name": "SIP-line Trunk VoIP FAQ v1 0.doc",
+                // eslint-disable-next-line
+                "type": "application\/msword",
+                "size": 488448,
+                "atime": 1660650089,
+                "mtime": 1641977227,
+                "dev": 2049
+            }, {
+                "name": "catalog_2018.pdf",
+                // eslint-disable-next-line
+                "type": "application\/pdf",
+                "size": 11997202,
+                "atime": 1660650089,
+                "mtime": 1641977229,
+                "dev": 2049
+            }]
+        }
+    }
 };
 
 export default App;
