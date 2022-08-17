@@ -24,7 +24,7 @@ function App() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [sorting, setSorting] = useState(null);
-    const [shouldShowDetails, setShouldShowDetails] = useState(false);
+    const [shouldShowDetails, setShouldShowDetails] = useState(true);
 
     const changeSort = (field) => {
         const newSorting = {
